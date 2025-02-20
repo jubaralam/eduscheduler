@@ -12,23 +12,16 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { addAssignCourse } from "../stateManagement/userSlice";
+import { useDispatch } from "react-redux";
 
-const CourseCard = ({ _id, title, description, poster, token }) => {
+const CourseCard = ({ _id, title, description, poster }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const handleRedirect = () => {
-    localStorage.removeItem("course");
-    localStorage.setItem(
-      "course",
-      JSON.stringify({
-        _id,
-        title,
-        description,
-        poster,
-        token,
-      })
-    );
+    dispatch(addAssignCourse({ id: _id }));
     navigate(`/admin-dashboard/assign/${_id}`);
   };
 

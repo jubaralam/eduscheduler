@@ -10,8 +10,11 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addUser } from "../stateManagement/userSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [email, setEmail] = useState("zubair@gmail.com");
@@ -35,6 +38,7 @@ const Login = () => {
       const { token, user } = res.data;
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
+      dispatch(addUser({ user, token }));
       if (user.role == "admin") {
         navigate("/admin-dashboard");
       } else {

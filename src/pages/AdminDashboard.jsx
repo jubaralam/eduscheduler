@@ -5,34 +5,27 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Box, Card, Container } from "@mui/material";
 import CourseCard from "./CourseCard";
+import { useDispatch, useSelector } from "react-redux";
+import { addCourses, removeUser } from "../stateManagement/userSlice";
 
 const AdminDashboard = () => {
-  const [token, setToken] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [deleteId, setDeleteId] = useState("");
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
   const [error, setError] = useState("");
-  const [user, setUser] = useState(null);
-  const [todos, setTodos] = useState([]);
+
   const navigate = useNavigate();
 
   // Fetch user details & token
-  const getUserDetails = async () => {
-    try {
-      const storedUser = JSON.parse(localStorage.getItem("user"));
-      const storedToken = localStorage.getItem("token");
-
-      if (storedUser) setUser(storedUser);
-      if (storedToken) setToken(storedToken);
-    } catch (error) {
-      console.log(error.message);
-      setError("Failed to fetch user details.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const user = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
+  const courses = useSelector((state) => state.courses);
+  console.log("redux user data", user);
+  console.log("redux token ", token);
+  console.log("redux courses ", courses);
 
   // Fetch todos after token is available
-  const getTodos = async () => {
+  const getCourses = async () => {
     setLoading(true);
     if (!token) {
       setError("Token Not Found");
@@ -46,7 +39,9 @@ const AdminDashboard = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      setTodos(res.data.data);
+
+      dispatch(addCourses({ courses: res.data.data }));
+      setLoading(false);
     } catch (error) {
       setError(
         error?.response?.data?.message ||
@@ -58,24 +53,12 @@ const AdminDashboard = () => {
     }
   };
 
-  // Run only once to get user details
   useEffect(() => {
-    getUserDetails();
+    getCourses();
   }, []);
 
-  // Run when token becomes available
-  useEffect(() => {
-    if (token) getTodos();
-  }, [token]);
-
-  useEffect(() => {
-    if (deleteId) {
-      const filteredData = todos.filter((todo) => todo._id !== deleteId);
-      setTodos(filteredData);
-    }
-  }, [deleteId]);
-
   // Loading state
+
   if (loading) {
     return (
       <div>
@@ -88,6 +71,7 @@ const AdminDashboard = () => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
+    dispatch(removeUser());
     navigate("/login");
   };
   const handleAdd = () => {
@@ -137,15 +121,8 @@ const AdminDashboard = () => {
           )}
 
           <div className="card-container flex flex-wrap justify-center">
-            {todos.length > 0 ? (
-              todos.map((todo) => (
-                <CourseCard
-                  key={todo._id}
-                  {...todo}
-                  token={token}
-                  setDeleteId={setDeleteId}
-                />
-              ))
+            {courses.length > 0 ? (
+              courses.map((todo) => <CourseCard key={todo._id} {...todo} />)
             ) : (
               <p>No todos available.</p>
             )}
