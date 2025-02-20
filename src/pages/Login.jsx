@@ -14,8 +14,8 @@ import axios from "axios";
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("zubair@gmail.com");
+  const [password, setPassword] = useState("zubair");
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
@@ -112,13 +112,13 @@ const Login = () => {
                 {loading ? "Logging in..." : "Login"}
               </Button>
             </Box>
-            <Button
+            {/* <Button
               variant="outlined"
               onClick={() => navigate("/register")}
               sx={{ width: "100%", mt: 2, py: 1, borderRadius: 3 }}
             >
               Don&#39;t have an account? Sign up now!
-            </Button>
+            </Button> */}
           </Box>
         </CardContent>
       </Card>

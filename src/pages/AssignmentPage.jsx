@@ -83,8 +83,9 @@ const AssignmentPage = () => {
   useEffect(() => {
     if (course) {
       findInstructor();
+      console.log("get called for users")
     }
-  }, [course]);
+  }, [id, course]);
   // setPayload({});
 
   return (
