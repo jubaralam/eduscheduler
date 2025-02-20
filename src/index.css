@@ -1,0 +1,174 @@
+* {
+  margin: 0px;
+  padding: 0;
+}
+
+.flex {
+  display: flex;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.align-center {
+  align-items: center;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.w-full {
+  width: 100%;
+}
+.h-screen {
+  height: 100%;
+}
+.dashboard-container {
+  background-color: #f7f9fb;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.card-container {
+  max-width: 800px;
+  margin: 5px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  min-width: 100%;
+
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  margin: 15px auto;
+  padding: 15px 10px;
+  background-color: white;
+  border: 1px solid rgb(218, 218, 218);
+  border-radius: 10px;
+  text-transform: capitalize;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-details {
+  /* max-width: 350px;
+  width: 350px; */
+}
+
+.card h2 {
+  font-size: 1.6rem;
+  margin: 10px 0;
+}
+
+.card p {
+  font-size: 0.9rem;
+  margin: 0;
+  padding: 5px 0;
+}
+
+.status {
+  padding: 5px;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.card-status {
+  min-width: 150px;
+  margin: 10px 0;
+}
+
+.priority-tag {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.neither {
+  background-color: #e0e0e0;
+  color: #555;
+}
+
+.important_not_urgent {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.urgent_not_important {
+  background-color: #ffe5b4;
+  color: #b45f06;
+}
+
+.urgent_important {
+  background-color: #ffb3b3;
+  color: #a70000;
+}
+
+.overdue-tag {
+  /* background-color: red; */
+  color: red;
+  padding: 4px 6px;
+  border-radius: 4px;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.pending {
+  background-color: #fff5cc;
+  color: #7a5a00;
+  border: 1px solid #ffcc00;
+}
+
+.in-progress {
+  background-color: #ccf2ff;
+  color: #004d66;
+}
+
+.completed {
+  background-color: #ccffd7;
+  color: #006d3b;
+}
+
+.default {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.card-actions {
+  margin-top: 12px;
+}
+
+.btn {
+  padding: 6px 12px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.update-btn {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: #fff;
+}
+.update-btn:hover {
+  background-color: #21a525;
+  color: #fff;
+}
+
+.delete-btn:hover {
+  background-color: #ce2b1f;
+  color: #fff;
+}
